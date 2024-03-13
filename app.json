@@ -15,7 +15,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.SwimGoalie",
+      "useFrameworks":"static"
     },
     "android": {
       "adaptiveIcon": {
