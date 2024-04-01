@@ -85,11 +85,6 @@ const App = () => {
             component={Login}
           />
           <Stack.Screen
-            options={{ headerShown: false }}
-            name="Register"
-            component={Register}
-          />
-          <Stack.Screen
             name="Footer"
             component={Footer}
             options={{ headerShown: false }}

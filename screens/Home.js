@@ -35,6 +35,7 @@ const Home = () => {
             color:activeColors.text,
             fontSize:32,
             alignSelf:'center',
+            fontFamily:"Cochin",
             paddingTop:100
           }}>
             Hi! This is the Home Screen. 

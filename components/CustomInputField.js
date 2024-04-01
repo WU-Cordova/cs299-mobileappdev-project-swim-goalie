@@ -18,7 +18,7 @@ export default function CustomInputField({
     <View
       style={{
         flexDirection: "row",
-        borderBottomColor: "#ccc",
+        borderBottomColor: "black",
         borderBottomWidth: 1,
         paddingBottom: 8,
         marginBottom: 25,
@@ -26,16 +26,17 @@ export default function CustomInputField({
     >
       {icon}
         <TextInput
-          placeholderTextColor={activeColors.text}
+          placeholderTextColor={activeColors.onPrimary}
           placeholder={label}
+          
           keyboardAppearance={theme.mode}
           keyboardType={keyboardType}
-          style={{ flex: 1, paddingVertical: 0, color: activeColors.tint }}
+          style={{ flex: 1, paddingVertical: 0, color: activeColors.tint,fontFamily:"Cochin", }}
           secureTextEntry={isPassword}
         />
        
       <TouchableOpacity onPress={fieldButtonFunction}>
-        <Text style={{ color: activeColors.accent, fontWeight: "700" }}>
+        <Text style={{ color: activeColors.onPrimary, fontWeight: "700",fontFamily:"Cochin", }}>
           {fieldButtonLabel}
         </Text>
       </TouchableOpacity>

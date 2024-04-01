@@ -19,71 +19,50 @@ const Login = ({ navigation }) => {
   let activeColors = colors[theme.mode];
 
   return (
-    <SafeAreaView
-      style={{
-        backgroundColor: activeColors.primary,
-        flex: 1,
-        justifyContent: "center",
-      }}
-    >
+    
       <ScrollView style={{ 
-        paddingTop:32,
+        paddingTop:256,
         backgroundColor: activeColors.primary,
         flex: 1,
-        paddingHorizontal: 25 }}>
+        paddingHorizontal: 25,
+        }}>
+        
         <Text style={{
           alignSelf:'center',
-          fontSize:64,
-          color:activeColors.accent
+          textAlign:"center",
+          fontSize:32,
+          fontFamily:"Cochin",
+          color:activeColors.onPrimary,
+          paddingHorizontal:12,
+          paddingBottom:30
         }}
         >
-          LocalVibes!!
+          Welcome to SwimGoalie.
+          Please enter your name
+          so we can find your times.
+          
         </Text>
-        <Image
-        style={{
-          height:256,
-          width:256,
-          alignSelf:"center"
-        }}
-        source={require('../assets/icon.png')}
-        >
-
-        </Image>
-
-        <CustomInputField label="email"
-          inputType="email"
-          icon={<Ionicons name="mail-outline" color={activeColors.tertiary}
-          size={28} />}
-  >
-        </CustomInputField>
-        <CustomInputField label="password"
-          inputType="password"
-          icon={<Ionicons name="lock-closed-outline"
-          color={activeColors.tertiary}
-          size={28} />}
-          fieldButtonLabel="Forgot password?"
+     
+        
+        <CustomInputField label="Name"
+          inputType="Name"
 
 
   >
         </CustomInputField>
         <CustomButton label="Submit"
+        color={activeColors.onPrimary}
         onPress={() =>
           navigation.navigate('Footer')}
         >
         </CustomButton>
         
-        <TouchableOpacity 
-        onPress={()=>
-          navigation.navigate('Register')}>
-        <Text style={{ color: activeColors.accent, fontWeight: "700",alignSelf:'center' }}>
-          Register!
-        </Text>
-      </TouchableOpacity>
+        
 
         
        
       </ScrollView>
-    </SafeAreaView>
+    
   );
 };
 
