@@ -3,6 +3,7 @@ import { colors } from "../config/theme";
 import { ThemeContext } from "../context/ThemeContext";
 import { View, ScrollView, RefreshControl,Text,Image } from "react-native";
 import { StyleSheet } from "react-native";
+import { useAuth } from "../context/UserContext"
 
 const Home = () => {
   const { theme } = useContext(ThemeContext);

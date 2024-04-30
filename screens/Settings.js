@@ -5,6 +5,7 @@ import {
   Switch,
   ScrollView,
   Appearance,
+  Text,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { colors } from "../config/theme";
@@ -12,11 +13,21 @@ import { ThemeContext } from "../context/ThemeContext";
 import StyledText from "../components/texts/StyledText";
 import SettingsItem from "../components/settings/SettingsItem";
 import { Ionicons } from "@expo/vector-icons";
+import { auth,db } from "../services/firebaseConfig";
+import { useAuth } from "../context/UserContext";
+import { doc, getDoc,DocumentSnapshot } from "firebase/firestore";
+
+
+
 
 const Settings = ({ navigation }) => {
 
   const { theme, updateTheme } = useContext(ThemeContext);
   let activeColors = colors[theme.mode];
+
+  const {loggedInUser}=useAuth();
+  const userId = loggedInUser.uid;
+  const user_data = db.collection("users").doc(`${userId}`);
 
   //here we set the state of the switch to the current theme
   //theme.mode is the current theme which we get from the context
@@ -49,10 +60,15 @@ const Settings = ({ navigation }) => {
       showsHorizontalScrollIndicator={false}
     >
 
+    
+      {/* <Text style={{ color: activeColors.accent }}>
+      {displayname}
+      </Text> */}
+
       <StyledText style={{ color: activeColors.accent }} bold>
         Theme Switch
       </StyledText>
-
+      
       <View style={styles.section}>
         <SettingsItem label="Dark Mode">
           <Switch
@@ -62,11 +78,12 @@ const Settings = ({ navigation }) => {
             ios_backgroundColor={activeColors.primary}
             trackColor={{
               false: activeColors.primary,
-              true: activeColors.accent,
+              true: activeColors.secondary,
             }}
           ></Switch>
         </SettingsItem>
       </View>
+      
       <View style={styles.logout}>
         <TouchableOpacity onPress={() => navigation.navigate("Login")}>
           <SettingsItem>

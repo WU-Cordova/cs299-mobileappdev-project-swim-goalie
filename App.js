@@ -6,12 +6,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './screens/Login';
 import { storeData, getData } from './config/asyncStorage';
 import * as SplashScreen from 'expo-splash-screen';
-import Home from './screens/Home'
+import Home from './screens/Home';
+import { AuthProvider,useAuth } from './context/UserContext';
 
 //Theme context is used to update the
 //theme of the app. It will be used in
 //all the screens of the app.
 import { ThemeContext } from './context/ThemeContext';
+import Register from './screens/Register';
+
 
 //creating simple splash screen
 SplashScreen.preventAutoHideAsync();
@@ -27,7 +30,7 @@ const App = () => {
   //the current theme of the device and save
   //it in theme state.
   const [theme, setTheme] = useState({ mode: Appearance.getColorScheme() });
-
+  
   //updateTheme function takes newTheme as a parameter
   //if newTheme is not passed then it will toggle the theme
   //and store the new theme in async storage
@@ -76,6 +79,7 @@ const App = () => {
     //we will pass the theme and updateTheme function
     //to the ThemeContext.Provider so that it can be
     //used in all the screens of the app.
+    <AuthProvider>
     <ThemeContext.Provider value={{ theme, updateTheme }}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
@@ -89,6 +93,11 @@ const App = () => {
             component={Footer}
             options={{ headerShown: false }}
           />
+           <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="Home"
             component={Home}
@@ -97,6 +106,7 @@ const App = () => {
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>
+    </AuthProvider>
   );
 };
 

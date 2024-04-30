@@ -10,6 +10,7 @@ export default function CustomInputField({
   keyboardType,
   fieldButtonLabel,
   fieldButtonFunction,
+  onChangeTextFunction,
 }) {
   const { theme } = useContext(ThemeContext);
   let activeColors = colors[theme.mode];
@@ -33,6 +34,7 @@ export default function CustomInputField({
           keyboardType={keyboardType}
           style={{ flex: 1, paddingVertical: 0, color: activeColors.tint,fontFamily:"Cochin", }}
           secureTextEntry={isPassword}
+          onChangeText={onChangeTextFunction}
         />
        
       <TouchableOpacity onPress={fieldButtonFunction}>

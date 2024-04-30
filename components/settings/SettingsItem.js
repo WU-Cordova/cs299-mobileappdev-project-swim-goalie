@@ -18,7 +18,7 @@ const SettingsItem = ({ children, label }) => {
         styles.settingsItem,
       ]}
     >
-      <StyledText style={[{ color: activeColors.tertiary }, styles.label]}>
+      <StyledText style={[{ color: activeColors.onSecondary }, styles.label]}>
         {label}
       </StyledText>
       {children}
