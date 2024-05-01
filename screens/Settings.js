@@ -15,7 +15,7 @@ import SettingsItem from "../components/settings/SettingsItem";
 import { Ionicons } from "@expo/vector-icons";
 import { auth,db } from "../services/firebaseConfig";
 import { useAuth } from "../context/UserContext";
-import { doc, getDoc,DocumentSnapshot } from "firebase/firestore";
+
 
 
 
@@ -24,11 +24,25 @@ const Settings = ({ navigation }) => {
 
   const { theme, updateTheme } = useContext(ThemeContext);
   let activeColors = colors[theme.mode];
-
+  const [Name, setName]=useState('');
   const {loggedInUser}=useAuth();
   const userId = loggedInUser.uid;
-  const user_data = db.collection("users").doc(`${userId}`);
+  const user_doc=db.collection("users").doc(`${userId}`);
+  const get_user_data = (doc1)=>{doc1.get()
+    .then(Snapshot=>{
+      //console.log(Snapshot.data())
+      const snap=Snapshot.data();
+      setName(snap['displayName'])
 
+    })}
+
+    //This stops an infinite update loop 
+    if (Name==''){
+      get_user_data(user_doc)
+      
+      
+    }
+  
   //here we set the state of the switch to the current theme
   //theme.mode is the current theme which we get from the context
   const [isDarkTheme, setIsDarkTheme] = useState(theme.mode === "dark");
@@ -61,11 +75,17 @@ const Settings = ({ navigation }) => {
     >
 
     
-      {/* <Text style={{ color: activeColors.accent }}>
-      {displayname}
-      </Text> */}
+      <StyledText style={{ color: activeColors.onPrimary , fontFamily:"Cochin"}} bold>
+        Profile info
+        
+      </StyledText>
 
-      <StyledText style={{ color: activeColors.accent }} bold>
+      <StyledText style={{ color: activeColors.onPrimary, alignSelf:'center', fontFamily:"Cochin"}} bold>
+        Name: {Name} 
+        
+      </StyledText>
+
+      <StyledText style={{ color: activeColors.onPrimary , fontFamily:"Cochin"}} bold>
         Theme Switch
       </StyledText>
       
@@ -88,7 +108,7 @@ const Settings = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate("Login")}>
           <SettingsItem>
             <Ionicons name="log-out-outline" size={24} color="red" />
-            <StyledText style={{ color: "red" }}> Logout</StyledText>
+            <StyledText style={{ color: "red", fontFamily:"Cochin" }}> Logout</StyledText>
           </SettingsItem>
         </TouchableOpacity>
       </View>
@@ -106,6 +126,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     marginTop: 25,
     marginBottom: 25,
+    fontFamily:"Cochin",
   },
   logout: {
     bottom: 0,
@@ -117,6 +138,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     justifyContent: "center",
     alignItems: "center",
+    fontFamily:"Cochin",
   },
 });
 

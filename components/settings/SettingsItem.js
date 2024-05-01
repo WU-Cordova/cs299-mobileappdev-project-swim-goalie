@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontStyle: "italic",
+    fontFamily:"Cochin"
   },
 });
 

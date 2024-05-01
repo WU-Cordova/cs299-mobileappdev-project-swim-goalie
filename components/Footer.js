@@ -17,6 +17,7 @@ export default function Footer() {
       screenOptions={({ route }) => ({
         tabBarStyle: {
           backgroundColor: activeColors.secondary,
+          
         },
         headerShown: true,
         tabBarIcon: ({ focused, color, size }) => {
@@ -38,6 +39,7 @@ export default function Footer() {
         headerTitleStyle: {
           paddingLeft: 10,
           fontSize: 24,
+          fontFamily:"Cochin"
         },
         headerStyle: {
           backgroundColor: activeColors.secondary,
