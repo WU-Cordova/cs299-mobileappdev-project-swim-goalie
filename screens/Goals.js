@@ -7,9 +7,10 @@ import { useAuth } from "../context/UserContext";
 import { EventList, EventNames } from "../context/WorldRecords";
 import { auth,db } from "../services/firebaseConfig";
 import {Card} from "@rneui/base";
+
 const Goals = () => {
-    const { theme } = useContext(ThemeContext);
-    let activeColors = colors[theme.mode];
+    const { themes } = useContext(ThemeContext);
+    let activeColors = colors[themes.mode];
     const [refreshing, setRefreshing] = useState(false);
     const {loggedInUser}= useAuth()
     const dataDict={}
