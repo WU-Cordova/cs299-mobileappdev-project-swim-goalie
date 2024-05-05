@@ -14,8 +14,9 @@ import { AuthProvider,useAuth } from './context/UserContext';
 //all the screens of the app.
 import { ThemeContext } from './context/ThemeContext';
 import Register from './screens/Register';
-
-
+import Bests from './screens/Bests';
+import Goals from './screens/Goals';
+import Update from './screens/Update';
 //creating simple splash screen
 SplashScreen.preventAutoHideAsync();
 
@@ -101,6 +102,21 @@ const App = () => {
           <Stack.Screen
             name="Home"
             component={Home}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Bests"
+            component={Bests}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Goals"
+            component={Goals}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Update"
+            component={Update}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

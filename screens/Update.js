@@ -1,26 +1,18 @@
 import React, { useContext, useState, useRef} from "react";
 import { colors } from "../config/theme";
 import { ThemeContext } from "../context/ThemeContext";
-import { View, ScrollView, RefreshControl,Text,Image } from "react-native";
+import { View, ScrollView,Text,Image } from "react-native";
 import { StyleSheet } from "react-native";
-import { useAuth } from "../context/UserContext"
+import { useAuth } from "../context/UserContext";
 
-const Home = () => {
-  const { theme } = useContext(ThemeContext);
-  let activeColors = colors[theme.mode];
+const Update = () => {
+    const { theme } = useContext(ThemeContext);
+    let activeColors = colors[theme.mode];
 
-  const [refreshing, setRefreshing] = useState(false);
+  
+  
 
-  const onRefresh = () => {
-    setRefreshing(true);
-
-    // Fetch new data here and update your state
-
-    // After fetching the data, set refreshing to false
-    setRefreshing(false);
-  };
-
-  return (
+    return (
     <ScrollView
       showsVerticalScrollIndicator={true}
       style={[
@@ -39,7 +31,7 @@ const Home = () => {
             fontFamily:"Cochin",
             paddingTop:100
           }}>
-            Hi! Welcome to SwimGoalie.
+            Update Screen
           </Text>
         
           
@@ -62,4 +54,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Home;
+export default Update;

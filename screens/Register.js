@@ -1,4 +1,4 @@
-import { app, auth } from "../services/firebaseConfig"
+import { app, auth,db } from "../services/firebaseConfig"
 import React, { useState, useContext } from "react";
 import {useAuth} from "../context/UserContext";
 import {
@@ -20,20 +20,24 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
 import CustomButton from "../components/CustomButton";
-
+import { setDoc} from "firebase/firestore";
 
 
 const Register = ({ navigation }) => {
   const { theme } = useContext(ThemeContext);
-  const {setLoggedInUser} =useAuth()
   let activeColors = colors[theme.mode];
-
+  const date = new Date();
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  let currentDate = `${day}-${month}-${year}`;
   const [Name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({}); 
   const [isFormValid, setIsFormValid] = useState(false); 
+  const {loggedInUser,setLoggedInUser}=useAuth();
 
   const validateForm = () => { 
     let errors = {}; 
@@ -69,26 +73,23 @@ const createUser = async () => {
     auth.createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        setLoggedInUser(user)
+        setLoggedInUser(user);
+        auth.updateCurrentUser(user);
+        const userId=user.uid;
+        const user_doc=db.collection("users").doc(`${userId}`)
+        setDoc(user_doc, {displayName:Name,dateJoined:currentDate},{merge:true});
       })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(`Create User error code ${errorCode} - ${errorMessage}`);
     });
-
+    
     console.log("User created");
   };
 
 
-  const handleLogin = async () => {
-
-    if (!validateForm()) {
-      return; 
-    }
-    
-    navigation.navigate("Footer");
-  }
+  
 
   const handleRegister = async () => {
     console.log(`Register button pressed {Full Name: ${Name}, Email: ${email}`)

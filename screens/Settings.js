@@ -15,8 +15,8 @@ import SettingsItem from "../components/settings/SettingsItem";
 import { Ionicons } from "@expo/vector-icons";
 import { auth,db } from "../services/firebaseConfig";
 import { useAuth } from "../context/UserContext";
-
-
+import CustomInputField from "../components/CustomInputField";
+import { setDoc} from "firebase/firestore";
 
 
 
@@ -24,7 +24,10 @@ const Settings = ({ navigation }) => {
 
   const { theme, updateTheme } = useContext(ThemeContext);
   let activeColors = colors[theme.mode];
+  const [email, setEmail] = useState("");
   const [Name, setName]=useState('');
+  const [tempName, setTempName]=useState('');
+  const [joinDate, setJoinDate]=useState('');
   const {loggedInUser}=useAuth();
   const userId = loggedInUser.uid;
   const user_doc=db.collection("users").doc(`${userId}`);
@@ -33,6 +36,7 @@ const Settings = ({ navigation }) => {
       //console.log(Snapshot.data())
       const snap=Snapshot.data();
       setName(snap['displayName'])
+      setJoinDate(snap['dateJoined'])
 
     })}
 
@@ -42,7 +46,7 @@ const Settings = ({ navigation }) => {
       
       
     }
-  
+
   //here we set the state of the switch to the current theme
   //theme.mode is the current theme which we get from the context
   const [isDarkTheme, setIsDarkTheme] = useState(theme.mode === "dark");
@@ -54,6 +58,15 @@ const Settings = ({ navigation }) => {
     setIsDarkTheme((prev) => !prev);
   };
 
+  
+
+  const onSave = async () => {
+    let name=tempName
+    await setDoc(user_doc, {displayName:name},{merge:true});
+    setName(name)
+  };
+
+
   useEffect(() => {
     //here we listen for the color scheme change and update the state of the switch
     //this is necessary so that the switch automatically updates
@@ -63,6 +76,11 @@ const Settings = ({ navigation }) => {
       colorScheme === "dark" ? setIsDarkTheme(true) : setIsDarkTheme(false);
     });
   }, []);
+
+  useEffect(() => {
+    const userEmail = auth.currentUser.email;
+    setEmail(userEmail);
+  }, [email]);
 
   return (
     <ScrollView
@@ -75,19 +93,27 @@ const Settings = ({ navigation }) => {
     >
 
     
-      <StyledText style={{ color: activeColors.onPrimary , fontFamily:"Cochin"}} bold>
-        Profile info
-        
-      </StyledText>
+      <SettingsItem label="username">
+        <StyledText>{Name}</StyledText>
+      </SettingsItem>
 
-      <StyledText style={{ color: activeColors.onPrimary, alignSelf:'center', fontFamily:"Cochin"}} bold>
-        Name: {Name} 
-        
-      </StyledText>
+      
+      <SettingsItem label="email">
+        <StyledText>{email}</StyledText>
+      </SettingsItem>
+      <SettingsItem label="joined on">
+        <StyledText>{joinDate}</StyledText>
+      </SettingsItem>
+      <StyledText style={{marginTop:32,marginBottom:16}}> Edit Username</StyledText>
+      <CustomInputField
+        label={Name}
+        inputType={'name'}
+        onChangeTextFunction={setTempName}
+        fieldButtonLabel="Save"
+        fieldButtonFunction={onSave}
+         >
 
-      <StyledText style={{ color: activeColors.onPrimary , fontFamily:"Cochin"}} bold>
-        Theme Switch
-      </StyledText>
+        </CustomInputField>
       
       <View style={styles.section}>
         <SettingsItem label="Dark Mode">
