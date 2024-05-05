@@ -1,19 +1,21 @@
-import React, { useContext, useState, useRef} from "react";
+import React, { useContext, useState, useRef, useEffect} from "react";
 import { colors } from "../config/theme";
 import { ThemeContext } from "../context/ThemeContext";
-import { View, ScrollView,Text,Image } from "react-native";
+import { View, SafeAreaView,Text,Image,FlatList, ScrollView } from "react-native";
 import { StyleSheet } from "react-native";
 import { useAuth } from "../context/UserContext";
-import { EventList, EventNames } from "../context/WorldRecords";
+import { EventList, EventNames,FINA_score } from "../context/WorldRecords";
 import { auth,db } from "../services/firebaseConfig";
 import {Card} from "react-native-paper";
 
 const Goals = () => {
-    const { themes } = useContext(ThemeContext);
-    let activeColors = colors[themes.mode];
+    const { theme } = useContext(ThemeContext);
+    let activeColors = colors[theme.mode];
     const [refreshing, setRefreshing] = useState(false);
+    const [isFetched, setIsFetched]=useState(false);
     const {loggedInUser}= useAuth()
     const dataDict={}
+    const [hookedData,setHookedData]=useState({})
     const userId = loggedInUser.uid;
     const user_doc=db.collection("users").doc(`${userId}`);
     const get_user_data = async(doc1)=>{doc1.get()
@@ -21,17 +23,39 @@ const Goals = () => {
           //console.log(Snapshot.data())
           const snap=Snapshot.data();
           for (x in EventList){
-            const smallDict=dataDict
             dataDict[EventList[x]]=snap[EventList[x]]
             
           }
-          console.log(dataDict)
+          setHookedData(dataDict)
+          setIsFetched(true)
+          console.log('successfully pulled times')
         })}
 
-    
+        if (!isFetched){
         get_user_data(user_doc.collection('times').doc('goals'))
+      }
         
-            
+
+        const styles = StyleSheet.create({
+          Container: {
+            flex: 1,
+          },
+          title:{
+            color:activeColors.onSecondary,
+            fontSize:32,
+            fontFamily:"Cochin",
+          },
+          data:{
+            color:activeColors.onSecondary,
+            fontSize:24,
+            fontFamily:"Cochin",
+          },
+          header:{
+            color:activeColors.onSecondary,
+            fontSize:50,
+            fontFamily:"Cochin",
+          },
+        });     
        
     
     const onRefresh = () => {
@@ -43,64 +67,111 @@ const Goals = () => {
         setRefreshing(false);
     };
   
+    
+
+
   
+  
+    
+
 
     return (
-    <ScrollView
-      showsVerticalScrollIndicator={true}
-      style={[
-        {
-          backgroundColor: activeColors.primary,
-          alignContent:'left'
-        },
-        styles.Container,
-      ]}
-      contentContainerStyle={{ flexGrow: 1 }}
-      >
-        
-          <Text style={styles.header}>
-            Goal Views
+    <ScrollView 
+    style={[
+      {
+        backgroundColor: activeColors.primary,
+        alignContent:'left'
+      },
+      styles.Container,
+    ]}
+    contentContainerStyle={{ flexGrow: 1 }}>
+
+      <Text style={styles.header}>
+            Your Goal Times
           </Text>
           
-          <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
-            <Text style={styles.title}>
-                {EventNames["Fr50"]}
-            </Text>
-            <Text style={styles.data}>
-                {dataDict["Fr50"]}
-            </Text>
-            <Text style={styles.data}>
-                FINASCORE
-            </Text>
-            
-          </Card>
-          
-        
-
-
+    <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      Event Name        Time        FINA Score
+    </Text>
+   </Card>
+    <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["Fr50"]}        {hookedData["Fr50"]}        FINA:   {FINA_score("Fr50",hookedData["Fr50"])}
+    </Text>
+   </Card>
+   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["Fr100"]}        {hookedData["Fr100"]}        FINA:   {FINA_score("Fr100",hookedData["Fr100"])}
+    </Text>
+   </Card>
+   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["Fr200"]}        {hookedData["Fr200"]}        FINA:   {FINA_score("Fr200",hookedData["Fr200"])}
+    </Text>
+   </Card>
+   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["Fr500"]}        {hookedData["Fr500"]}        FINA:   {FINA_score("Fr500",hookedData["Fr500"])}
+    </Text>
+   </Card>
+   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["Fr1000"]}        {hookedData["Fr1000"]}        FINA:   {FINA_score("Fr1000",hookedData["Fr1000"])}
+    </Text>
+   </Card>
+   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["Fr1650"]}        {hookedData["Fr1650"]}        FINA:   {FINA_score("Fr1650",hookedData["Fr1650"])}
+    </Text>
+   </Card>
+   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["Bk100"]}        {hookedData["Bk100"]}        FINA:   {FINA_score("Bk100",hookedData["Bk100"])}
+    </Text>
+   </Card>
+   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["Bk200"]}        {hookedData["Bk200"]}        FINA:   {FINA_score("Bk200",hookedData["Bk200"])}
+    </Text>
+   </Card>
+   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["Br100"]}        {hookedData["Br100"]}        FINA:   {FINA_score("Br100",hookedData["Br100"])}
+    </Text>
+   </Card>
+   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["Br200"]}        {hookedData["Br200"]}        FINA:   {FINA_score("Br200",hookedData["Br200"])}
+    </Text>
+   </Card>
+   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["Fl100"]}        {hookedData["Fl100"]}        FINA:   {FINA_score("Fl100",hookedData["Fl100"])}
+    </Text>
+   </Card>
+   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["Fl200"]}        {hookedData["Fl200"]}        FINA:   {FINA_score("Fl200",hookedData["Fl200"])}
+    </Text>
+   </Card>
+   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["IM200"]}        {hookedData["IM200"]}        FINA:   {FINA_score("IM200",hookedData["IM200"])}
+    </Text>
+   </Card>
+   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+    <Text style={styles.data}>
+      {EventNames["IM400"]}        {hookedData["IM400"]}        FINA:   {FINA_score("IM400",hookedData["IM400"])}
+    </Text>
+   </Card>
     </ScrollView>
   );
+
+  
+
 };
 
-const styles = StyleSheet.create({
-  Container: {
-    flex: 1,
-  },
-  title:{
-    color:activeColors.onSecondary,
-    fontSize:32,
-    fontFamily:"Cochin",
-  },
-  data:{
-    color:activeColors.onSecondary,
-    fontSize:24,
-    fontFamily:"Cochin",
-  },
-  header:{
-    color:activeColors.onSecondary,
-    fontSize:50,
-    fontFamily:"Cochin",
-  },
-});
+
 
 export default Goals;

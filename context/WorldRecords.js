@@ -1,4 +1,5 @@
 //Program to export things about Swimming events.
+import { useState } from "react";
 
 const EventList=[
     "Fr50",
@@ -70,13 +71,29 @@ const EmptyList={
 }
 
 const FINA_score=(race,time)=>{
-    const record=WorldRecords[race]
-    if (time=='NS'){
-        const score=0;
-    }else {
-        const score=Math.round(1000*((record/time)**3))
+    const WorldRecords={
+        Fr50:17.63,
+        Fr100:39.9,
+        Fr200:88.81,
+        Fr500:242.31,
+        Fr1000:513.93,
+        Fr1650:852.08,
+        Bk100:43.35,
+        Bk200:95.37,
+        Br100:49.53,
+        Br200:106.35,
+        Fl100:42.8,
+        Fl200:97.35,
+        IM200:96.34,
+        IM400:208.82,
     }
-    return (score)
+    const record=WorldRecords[race]
+    if (time!='NS'){
+        return Math.round(1000*((record/time)**3))
+    }else{
+        return 0
+    }
+    
 }
 
 export {FINA_score,EmptyList,EventList,EventNames}
