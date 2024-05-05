@@ -8,7 +8,16 @@ import { useAuth } from "../context/UserContext";
 const Bests = () => {
     const { theme } = useContext(ThemeContext);
     let activeColors = colors[theme.mode];
+    const [refreshing, setRefreshing] = useState(false);
 
+    const onRefresh = () => {
+        setRefreshing(true);
+
+        // Fetch new data here and update your state
+
+        // After fetching the data, set refreshing to false
+        setRefreshing(false);
+    };
   
   
 

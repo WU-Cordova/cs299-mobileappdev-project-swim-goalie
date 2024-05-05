@@ -21,6 +21,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import CustomButton from "../components/CustomButton";
 import { setDoc} from "firebase/firestore";
+import { EmptyList, EventList } from "../context/WorldRecords";
 
 
 const Register = ({ navigation }) => {
@@ -78,6 +79,13 @@ const createUser = async () => {
         const userId=user.uid;
         const user_doc=db.collection("users").doc(`${userId}`)
         setDoc(user_doc, {displayName:Name,dateJoined:currentDate},{merge:true});
+        const goal_doc=db.collection("users").doc(`${userId}`).collection("times").doc("goals");
+        const best_doc=db.collection("users").doc(`${userId}`).collection("times").doc("bests");
+        setDoc(goal_doc,EmptyList,{merge:true});
+        setDoc(best_doc,EmptyList,{merge:true});
+        
+       
+  
       })
     .catch((error) => {
       const errorCode = error.code;

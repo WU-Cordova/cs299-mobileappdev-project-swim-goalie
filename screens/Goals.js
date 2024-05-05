@@ -4,11 +4,43 @@ import { ThemeContext } from "../context/ThemeContext";
 import { View, ScrollView,Text,Image } from "react-native";
 import { StyleSheet } from "react-native";
 import { useAuth } from "../context/UserContext";
-
+import { EventList, EventNames } from "../context/WorldRecords";
+import { auth,db } from "../services/firebaseConfig";
+import {Card} from "react-native-elements";
 const Goals = () => {
     const { theme } = useContext(ThemeContext);
     let activeColors = colors[theme.mode];
+    const [refreshing, setRefreshing] = useState(false);
+    const {loggedInUser}= useAuth()
+    const dataDict={}
+    const userId = loggedInUser.uid;
+    const user_doc=db.collection("users").doc(`${userId}`);
+    const get_user_data = async(doc1)=>{doc1.get()
+        .then(Snapshot=>{
+          //console.log(Snapshot.data())
+          const snap=Snapshot.data();
+          for (x in EventList){
+            const smallDict=dataDict
+            dataDict[EventList[x]]=snap[EventList[x]]
+            
+          }
+          console.log(dataDict)
+        })}
+
     
+        get_user_data(user_doc.collection('times').doc('goals'))
+        
+            
+       
+    
+    const onRefresh = () => {
+        setRefreshing(true);
+
+        // Fetch new data here and update your state
+
+        // After fetching the data, set refreshing to false
+        setRefreshing(false);
+    };
   
   
 
@@ -18,22 +50,29 @@ const Goals = () => {
       style={[
         {
           backgroundColor: activeColors.primary,
+          alignContent:'left'
         },
         styles.Container,
       ]}
       contentContainerStyle={{ flexGrow: 1 }}
       >
         
-          <Text style={{
-            color:activeColors.text,
-            fontSize:32,
-            alignSelf:'center',
-            fontFamily:"Cochin",
-            paddingTop:100
-          }}>
+          <Text style={styles.header}>
             Goal Views
           </Text>
-        
+          
+          <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
+            <Text style={styles.title}>
+                {EventNames["Fr50"]}
+            </Text>
+            <Text style={styles.data}>
+                {dataDict["Fr50"]}
+            </Text>
+            <Text style={styles.data}>
+                FINASCORE
+            </Text>
+            
+          </Card>
           
         
 
@@ -46,12 +85,21 @@ const styles = StyleSheet.create({
   Container: {
     flex: 1,
   },
-  txt:{
-    color:'blue',
-    fontSize:20,
-    textAlign:'center',
-    marginTop:100
-  }
+  title:{
+    color:activeColors.onSecondary,
+    fontSize:32,
+    fontFamily:"Cochin",
+  },
+  data:{
+    color:activeColors.onSecondary,
+    fontSize:24,
+    fontFamily:"Cochin",
+  },
+  header:{
+    color:activeColors.onSecondary,
+    fontSize:50,
+    fontFamily:"Cochin",
+  },
 });
 
 export default Goals;
