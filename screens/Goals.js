@@ -150,7 +150,7 @@ const Goals = () => {
     {EventNames["Bk200"]}: {hookedData["Bk200"]}
     </Text>
     <Text style={styles.data}>
-     FINA Score:   {FINA_score("Br200",hookedData["Br200"])}
+     FINA Score:   {FINA_score("Bk200",hookedData["Bk200"])}
     </Text>     
     </Card>
     <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>

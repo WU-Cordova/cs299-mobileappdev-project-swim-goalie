@@ -19,6 +19,7 @@ const EventList=[
 
 
 
+
 const WorldRecords={
     Fr50:17.63,
     Fr100:39.9,
@@ -70,6 +71,14 @@ const EmptyList={
     IM400:"NS",
 }
 
+function TimeToSecs(duration){
+    const splitter = duration.split(':');
+    if (!splitter[1]){
+        return Number(splitter[0])
+    }
+    return (Number(splitter[0]) * 60 + Number(splitter[1]));
+}
+
 const FINA_score=(race,time)=>{
     const WorldRecords={
         Fr50:17.63,
@@ -88,8 +97,9 @@ const FINA_score=(race,time)=>{
         IM400:208.82,
     }
     const record=WorldRecords[race]
-    if (time!='NS'){
-        return Math.round(1000*((record/time)**3))
+    if (time!='NS' && time!=undefined){
+        const secs=TimeToSecs(time)
+        return Math.round(1000*((record/secs)**3))
     }else{
         return 0
     }

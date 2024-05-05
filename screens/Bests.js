@@ -8,7 +8,7 @@ import { EventList, EventNames,FINA_score } from "../context/WorldRecords";
 import { auth,db } from "../services/firebaseConfig";
 import {Card} from "react-native-paper";
 
-const Goals = () => {
+const Bests = () => {
     const { theme } = useContext(ThemeContext);
     let activeColors = colors[theme.mode];
     const [refreshing, setRefreshing] = useState(false);
@@ -150,7 +150,7 @@ const Goals = () => {
     {EventNames["Bk200"]}: {hookedData["Bk200"]}
     </Text>
     <Text style={styles.data}>
-     FINA Score:   {FINA_score("Br200",hookedData["Br200"])}
+     FINA Score:   {FINA_score("Bk200",hookedData["Bk200"])}
     </Text>     
     </Card>
     <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
@@ -210,4 +210,4 @@ const Goals = () => {
 
 
 
-export default Goals;
+export default Bests;
