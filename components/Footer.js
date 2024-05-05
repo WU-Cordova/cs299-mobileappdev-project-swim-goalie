@@ -34,7 +34,7 @@ export default function Footer() {
           } else if (route.name === "Best Times") {
             iconName = focused ? "stopwatch" : "stopwatch-outline";
             return <Ionicons name={iconName} size={24} color={color} />;
-          } else if (route.name === "Update Times") {
+          } else if (route.name === "Input Times") {
             iconName = focused ? "create" : "create-outline";
             return <Ionicons name={iconName} size={24} color={color} />;
           }  else if (route.name === "Settings") {
@@ -63,7 +63,7 @@ export default function Footer() {
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Best Times" component={Bests} />
       <Tab.Screen name="Goal Times" component={Goals} />
-      <Tab.Screen name="Update Times" component={Update} />
+      <Tab.Screen name="Input Times" component={Update} />
       <Tab.Screen name="Settings" component={Settings} />
       
       

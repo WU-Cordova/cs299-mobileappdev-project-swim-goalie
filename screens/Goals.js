@@ -44,16 +44,21 @@ const Goals = () => {
             color:activeColors.onSecondary,
             fontSize:32,
             fontFamily:"Cochin",
+            fontWeight:"bold",
+            textAlign:"center"
           },
           data:{
-            color:activeColors.onSecondary,
-            fontSize:24,
+            color:activeColors.secondaryContainer,
+            fontSize:20,
             fontFamily:"Cochin",
+            textAlign:"center"
+            
           },
           header:{
             color:activeColors.onSecondary,
             fontSize:50,
             fontFamily:"Cochin",
+            textAlign:'center'
           },
         });     
        
@@ -67,12 +72,6 @@ const Goals = () => {
         setRefreshing(false);
     };
   
-    
-
-
-  
-  
-    
 
 
     return (
@@ -80,7 +79,7 @@ const Goals = () => {
     style={[
       {
         backgroundColor: activeColors.primary,
-        alignContent:'left'
+        alignContent:'center'
       },
       styles.Container,
     ]}
@@ -89,82 +88,119 @@ const Goals = () => {
       <Text style={styles.header}>
             Your Goal Times
           </Text>
-          
-    <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
-    <Text style={styles.data}>
-      Event Name        Time        FINA Score
+
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["Fr50"]}: {hookedData["Fr50"]}
     </Text>
-   </Card>
-    <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["Fr50"]}        {hookedData["Fr50"]}        FINA:   {FINA_score("Fr50",hookedData["Fr50"])}
+     FINA Score:   {FINA_score("Fr50",hookedData["Fr50"])}
+    </Text>     
+    </Card>
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["Fr100"]}: {hookedData["Fr100"]}
     </Text>
-   </Card>
-   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["Fr100"]}        {hookedData["Fr100"]}        FINA:   {FINA_score("Fr100",hookedData["Fr100"])}
+     FINA Score:   {FINA_score("Fr100",hookedData["Fr100"])}
+    </Text>     
+    </Card>
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["Fr200"]}: {hookedData["Fr200"]}
     </Text>
-   </Card>
-   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["Fr200"]}        {hookedData["Fr200"]}        FINA:   {FINA_score("Fr200",hookedData["Fr200"])}
+     FINA Score:   {FINA_score("Fr200",hookedData["Fr200"])}
+    </Text>     
+    </Card>
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["Fr500"]}: {hookedData["Fr500"]}
     </Text>
-   </Card>
-   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["Fr500"]}        {hookedData["Fr500"]}        FINA:   {FINA_score("Fr500",hookedData["Fr500"])}
+     FINA Score:   {FINA_score("Fr500",hookedData["Fr500"])}
+    </Text>     
+    </Card>
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["Fr1000"]}: {hookedData["Fr1000"]}
     </Text>
-   </Card>
-   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["Fr1000"]}        {hookedData["Fr1000"]}        FINA:   {FINA_score("Fr1000",hookedData["Fr1000"])}
+     FINA Score:   {FINA_score("Fr1000",hookedData["Fr1000"])}
+    </Text>     
+    </Card>
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["Fr1000"]}: {hookedData["Fr1000"]}
     </Text>
-   </Card>
-   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["Fr1650"]}        {hookedData["Fr1650"]}        FINA:   {FINA_score("Fr1650",hookedData["Fr1650"])}
+     FINA Score:   {FINA_score("Br200",hookedData["Br200"])}
+    </Text>     
+    </Card>
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["Bk100"]}: {hookedData["Bk100"]}
     </Text>
-   </Card>
-   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["Bk100"]}        {hookedData["Bk100"]}        FINA:   {FINA_score("Bk100",hookedData["Bk100"])}
+     FINA Score:   {FINA_score("Bk100",hookedData["Bk100"])}
+    </Text>     
+    </Card>
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["Bk200"]}: {hookedData["Bk200"]}
     </Text>
-   </Card>
-   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["Bk200"]}        {hookedData["Bk200"]}        FINA:   {FINA_score("Bk200",hookedData["Bk200"])}
+     FINA Score:   {FINA_score("Br200",hookedData["Br200"])}
+    </Text>     
+    </Card>
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["Br100"]}: {hookedData["Br100"]}
     </Text>
-   </Card>
-   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["Br100"]}        {hookedData["Br100"]}        FINA:   {FINA_score("Br100",hookedData["Br100"])}
+     FINA Score:   {FINA_score("Br100",hookedData["Br100"])}
+    </Text>     
+    </Card>
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["Br200"]}: {hookedData["Br200"]}
     </Text>
-   </Card>
-   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["Br200"]}        {hookedData["Br200"]}        FINA:   {FINA_score("Br200",hookedData["Br200"])}
+     FINA Score:   {FINA_score("Br200",hookedData["Br200"])}
+    </Text>     
+    </Card>
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["Fl100"]}: {hookedData["Fl100"]}
     </Text>
-   </Card>
-   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["Fl100"]}        {hookedData["Fl100"]}        FINA:   {FINA_score("Fl100",hookedData["Fl100"])}
+     FINA Score:   {FINA_score("Fl100",hookedData["Fl100"])}
+    </Text>     
+    </Card>
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["Fl200"]}: {hookedData["Fl200"]}
     </Text>
-   </Card>
-   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["Fl200"]}        {hookedData["Fl200"]}        FINA:   {FINA_score("Fl200",hookedData["Fl200"])}
+     FINA Score:   {FINA_score("Fl200",hookedData["Fl200"])}
+    </Text>     
+    </Card>
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["IM200"]}: {hookedData["IM200"]}
     </Text>
-   </Card>
-   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["IM200"]}        {hookedData["IM200"]}        FINA:   {FINA_score("IM200",hookedData["IM200"])}
+     FINA Score:   {FINA_score("IM200",hookedData["IM200"])}
+    </Text>     
+    </Card>
+    <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
+    <Text style={styles.title}>
+    {EventNames["IM400"]}: {hookedData["IM400"]}
     </Text>
-   </Card>
-   <Card style={{backgroundColor:activeColors.secondary,flexDirection:'right'}}>
     <Text style={styles.data}>
-      {EventNames["IM400"]}        {hookedData["IM400"]}        FINA:   {FINA_score("IM400",hookedData["IM400"])}
-    </Text>
-   </Card>
+     FINA Score:   {FINA_score("IM400",hookedData["IM400"])}
+    </Text>     
+    </Card>
     </ScrollView>
   );
 
