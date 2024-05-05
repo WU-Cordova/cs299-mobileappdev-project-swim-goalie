@@ -6,7 +6,7 @@ import { StyleSheet } from "react-native";
 import { useAuth } from "../context/UserContext";
 import { EventList, EventNames } from "../context/WorldRecords";
 import { auth,db } from "../services/firebaseConfig";
-import {Card} from "@rneui/base";
+import {Card} from "react-native-paper";
 
 const Goals = () => {
     const { themes } = useContext(ThemeContext);
