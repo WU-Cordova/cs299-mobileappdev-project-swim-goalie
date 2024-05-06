@@ -106,7 +106,7 @@ const createUser = async () => {
       return; 
     }
 
-    createUser();
+    createUser()
     navigation.navigate("Footer");
   }
 
