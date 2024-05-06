@@ -15,9 +15,8 @@ const EventList=[
     "Fl100",
     "Fl200",
     "IM200",
-    "IM400"]
-
-
+    "IM400"
+]
 
 
 const WorldRecords={

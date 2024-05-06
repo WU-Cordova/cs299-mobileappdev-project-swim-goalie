@@ -14,6 +14,7 @@ const Goals = () => {
     const [refreshing, setRefreshing] = useState(false);
     const [isFetched, setIsFetched]=useState(false);
     const {loggedInUser}= useAuth()
+    const {needRefresh, callRefresh}=useAuth()
     const dataDict={}
     const [hookedData,setHookedData]=useState({})
     const userId = loggedInUser.uid;
@@ -34,7 +35,12 @@ const Goals = () => {
         if (!isFetched){
         get_user_data(user_doc.collection('times').doc('goals'))
       }
-        
+      useEffect(() => {
+        if (needRefresh){
+          setIsFetched(false)
+          callRefresh(false)
+        }
+      });
 
         const styles = StyleSheet.create({
           Container: {
@@ -131,10 +137,10 @@ const Goals = () => {
     </Card>
     <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
     <Text style={styles.title}>
-    {EventNames["Fr1000"]}: {hookedData["Fr1000"]}
+    {EventNames["Fr1650"]}: {hookedData["Fr1650"]}
     </Text>
     <Text style={styles.data}>
-     FINA Score:   {FINA_score("Br200",hookedData["Br200"])}
+     FINA Score:   {FINA_score("Fr1650",hookedData["Fr1650"])}
     </Text>     
     </Card>
     <Card style={{backgroundColor:activeColors.secondary,justifyContent:"space-evenly",marginBottom:12}}>
