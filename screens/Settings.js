@@ -73,7 +73,7 @@ const Settings = ({ navigation }) => {
     //when the user changes the theme from the settings
     Appearance.addChangeListener(({ colorScheme }) => {
       console.log(`colorScheme: ${colorScheme}`)
-      colorScheme === "dark" ? setIsDarkTheme(true) : setIsDarkTheme(false);
+      colorScheme === "dark" ? setIsDarkTheme(false) : setIsDarkTheme(true);
     });
   }, []);
 
@@ -118,7 +118,7 @@ const Settings = ({ navigation }) => {
       <View style={styles.section}>
         <SettingsItem label="Dark Mode">
           <Switch
-            value={isDarkTheme}
+            value={!isDarkTheme}
             onValueChange={toggleTheme}
             thumbColor={isDarkTheme ? "#fff" : activeColors.tertiary}
             ios_backgroundColor={activeColors.primary}

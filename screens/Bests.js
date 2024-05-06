@@ -29,7 +29,6 @@ const Bests = () => {
           }
           setHookedData(dataDict)
           setIsFetched(true)
-          console.log('successfully pulled times')
         })}
 
         if (!isFetched){

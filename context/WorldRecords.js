@@ -78,6 +78,16 @@ function TimeToSecs(duration){
     return (Number(splitter[0]) * 60 + Number(splitter[1]));
 }
 
+const PercentDrop=(goal,best)=>{
+    
+    if (goal!="NS" && goal!=undefined&&best!="NS" && best!=undefined){
+        return(Math.round(-10000*(1-(TimeToSecs(goal)/TimeToSecs(best))))/100)
+    }else{
+        return("NA")
+    }
+    
+};
+
 const FINA_score=(race,time)=>{
     const WorldRecords={
         Fr50:17.63,
@@ -105,4 +115,4 @@ const FINA_score=(race,time)=>{
     
 }
 
-export {FINA_score,EmptyList,EventList,EventNames}
+export {FINA_score,EmptyList,EventList,EventNames,PercentDrop}

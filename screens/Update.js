@@ -37,9 +37,9 @@ const Update = () => {
           
         }
         setHookedDataG(dataDictG)
-        console.log(hookedDataG)
+       
         setIsFetched(true)
-        console.log('successfully pulled goal times')
+        
       })}
     const get_best_data = async(doc1)=>{doc1.get()
         .then(Snapshot=>{
@@ -51,8 +51,7 @@ const Update = () => {
           }
         setHookedDataB(dataDictB)
         setIsFetched(true)
-        console.log(hookedDataB)
-        console.log('successfully pulled best times')
+        
         })}
     
     if (!isFetched){
@@ -424,6 +423,14 @@ const Update = () => {
         onChangeTextFunction={text=>add_to_dic(updateDicG,"IM400",text)}
          ></CustomInputField>   
     </Card>
+    <Button
+    onPress={onSave}
+    title="Save Button"
+    color={activeColors.onPrimary}
+    ></Button>
+    <Text style={{paddingBottom:200}}>
+    {/* adding padding to the bottom */}
+    </Text>
     </ScrollView>
   );
 
